@@ -1,0 +1,105 @@
+//WAP to make a banking system using classes and objects
+
+package myData;
+import java.util.*;
+
+class AccountDetails 
+{
+	String firstname,lastname;
+	
+	AccountDetails(String fn,String ln)
+	{
+		firstname = fn;
+		lastname = ln;
+	}
+	
+	public void greeting()
+	{
+		System.out.println("Welcome, " + firstname + " " + lastname);
+	}
+}
+
+class Amount
+{
+	double balance = 0.0;
+	
+	
+	public void deposit(double deposit)
+	{
+		balance += deposit;
+		System.out.println("Your balance after deposit amount of " + deposit + " is " + balance);
+	}
+	
+	public void withdraw(double withdraw)
+	{
+		if(withdraw > balance)
+		{
+			System.out.println("Insufficient funds in bank account");
+		}
+		else
+		{
+			balance -= withdraw;
+			System.out.println("Your balance after withdrawal amount of " + withdraw + " is " + balance);
+		}
+	}
+	
+	public void showbalance()
+	{
+		System.out.println("Your balance is " + balance);
+	}
+}
+
+public class Banking {
+	
+	public static void main(String[] args) {
+		
+		boolean loop = true;
+		Amount amt = new Amount();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Welcome to Java Bank");
+		
+		while(loop)
+		{
+			System.out.println("Services Available:\n1) Create Account\n2) Deposit\n3) Withdraw\n4) Balance\n5) Exit");
+			System.out.println("Enter your choice(1-5):");
+			int choice = sc.nextInt();
+			switch(choice)
+			{
+			case 1:
+				System.out.println("Enter first name:");
+				String fname = sc.next();
+				System.out.println("Enter last name:");
+				String lname = sc.next();
+				AccountDetails ad = new AccountDetails(fname,lname);
+				ad.greeting();
+				System.out.println("How can we help you?");
+				break;
+			case 2:
+				System.out.println("Enter amount to be deposited:");
+				double deposit = sc.nextDouble();
+				if(deposit < 0)
+				{
+					System.out.println("Invalid amount. Please try again");
+				}
+				else
+				{
+					amt.deposit(deposit);
+				}
+				break;
+			case 3:
+				System.out.println("Enter amount to be withdrawn:");
+				double withdraw = sc.nextDouble();
+				amt.withdraw(withdraw);
+				break;
+			case 4:
+				amt.showbalance();
+				break;
+			case 5:
+				loop = false;
+			}	
+		}
+		System.out.println("Thank you for using our banking system");
+		System.out.println("\t"+"Have a nice day !");
+		sc.close();
+}
+}
